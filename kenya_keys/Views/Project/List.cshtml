@@ -1,0 +1,16 @@
+﻿@{
+    List<KK.Models.Project> projects = (List<KK.Models.Project>)ViewData["projects"];
+    bool isAdmin = Request.IsAuthenticated && User.IsInRole("admin") ? true : false;
+    
+}
+
+<div>
+    <ul class="project-list">
+        @foreach (KK.Models.Project project in projects)
+        {
+            
+            <li class="@(isAdmin ? "edit admin-context-menu":"")">@(project.ProjectName)</li>
+        }
+    </ul>
+
+</div>

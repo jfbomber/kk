@@ -1,0 +1,94 @@
+﻿
+@{
+    List<KK.Models.Slide> slides = (List<KK.Models.Slide>)ViewData["slides"];
+    
+}
+
+<script type="text/javascript">
+    var Slide = {
+        Save: function (rowId, imgId) {
+            
+            var row = $("#"+rowId);
+
+            var slide = JSON.parse(row.find("input[type=hidden]")[0].value);
+            var img = document.getElementById(imgId);
+            
+            slide.photo_id =parseInt(document.getElementById(imgId).alt);
+            slide.slide_text = escape(row.find("textarea").val());
+            slide.slide_index = row.find("label")[0].innerHTML;
+           
+            $.ajax({
+                url: '/Slide/Save',
+                type: 'POST',
+                data: slide,
+                success: function (result) {
+                    console.log(result);
+                    alert('Saved');
+                },
+                error: function (error) {
+
+                }
+            });
+               
+
+
+        },
+        RowSelected: function (sender, rowId, imgId) {
+            var row = document.getElementById(rowId);
+            var img = document.getElementById(imgId);
+
+            var photo_id = sender.options[sender.selectedIndex].value;
+            var photo_url = "/Photo/GetPhoto?photoId=" + photo_id.toString() + "&size=s";
+            img.src = photo_url;
+            img.alt = photo_id;
+            
+
+
+
+        }
+    };
+
+    $(document).ready(function () {
+        $("#slides-edit").sortable({
+            sort: function (event, ui) {
+                console.log(event);
+            }
+        });
+
+
+
+    });
+
+</script>
+
+<div>
+    
+    <ul style="list-style:none;" id="slides-edit">
+        @foreach (KK.Models.Slide slide in slides)
+        {
+            string rowid = "slide-row-" + slide.SlideIndex.ToString();
+            string imgid = "slide-row-img-" + slide.SlideIndex.ToString();
+            string inputValue = String.Format(@"{{ ""slide_id"" : {0}, ""slide_text"" : ""{1}"", ""slide_index"" : {2},  ""photo_id"" :{3} }}",
+                slide.SlideID, slide.SlideText, slide.SlideIndex, slide.PhotoID);
+            string js = "Slide.RowSelected(this, '" + rowid + "','" + imgid + "')";
+            KK.Models.PhotoDropDown pdd = new KK.Models.PhotoDropDown();
+            pdd.OnChange = js;
+            <li style="height : 175px; list-style:none; border:solid 1px black;">
+                <ul id="@(rowid)" class="float">
+                    <li>
+                        <div><label>@(slide.SlideIndex)</label></div>
+                        <input type="hidden" value="@(inputValue)" />
+                    </li>
+                    <li>
+                        <img id="@(imgid)" src="@(slide.Photo.SmallUrl)" alt="@(slide.PhotoID)" />
+                        @Html.Partial("~/Views/Photo/DropDown.cshtml", pdd)
+                    </li>
+                    <li><textarea cols="50" rows="8">@(slide.SlideText)</textarea></li>
+                    <li><input type="button" value="save" onclick="javascript:Slide.Save('@(rowid)','@(imgid)');" /></li>
+                </ul>
+            </li>
+}
+
+
+    </ul>
+</div>

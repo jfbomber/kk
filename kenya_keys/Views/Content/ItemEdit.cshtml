@@ -1,0 +1,59 @@
+@model KK.Models.ContentItem
+@{
+    
+    KK.Models.PhotoDropDown ppd = new KK.Models.PhotoDropDown();
+    ppd.SelectedPhotoID = Model.ItemPhotoID;
+    ppd.OnChange = "document.getElementById('" + ppd.PhotoViewID + @"').src = " +
+        "'/Photo/GetPhoto?photoId='+this.options[this.selectedIndex].value+'&size=m';" +
+        "$('input[name=photoID]').val(this.options[this.selectedIndex].value);";
+
+    // 
+}
+
+<div class="item-edit">
+    <div>
+        <div class="item-close"><a href="javascript:Content.Item.CancelEdit();">Close</a></div>
+        <h1>@(Model.ItemID == null ? "Add Item" : "Edit Item") - @(Model.Content.ContentTitle)</h1>
+        <form name="@(Model.ItemFormID)">
+        <input type="hidden" name="contentID" value="@(Model.ContentID)" />
+            <input type="hidden" name="itemID" value="@(Model.ItemID)" />
+        <input type="hidden" name="photoID" value="@(Model.ItemPhotoID)" />
+        <div>
+             <div class="content-column"  >
+                 <div>
+                    @Html.Partial("~/Views/Photo/DropDown.cshtml", ppd)
+                </div>
+             </div>
+             <div class="content-column">
+                 <div><span>Item Title :</span><input name="itemTitle" type="text" value="@(Model.ItemTitle)" /></div>
+                 <div>
+                     <span>Item Hidden : </span><input onclick="javascript:$('input[name=itemHidden]').val(this.checked.toString())" type="checkbox" @(Model.ItemHidden == true ? "checked='checked'" : "") @(Model.ItemID == null ? "disabled" : "") />
+                     <input type="hidden" name="itemHidden" value="@(Model.ItemHidden == true ? "true" : "false")" />
+                 </div>   
+                 <div><span>Item Html : </span></div>
+                    <div>
+                        <textarea name="_TextAreaHtml">@(Html.Raw(Model.ItemHtml))</textarea>
+                        <input type="hidden" name="itemHtml" value="@(Html.Raw(Model.ItemHtml))" />
+                    </div>
+             </div>
+
+         </div>
+            <input type="button" value="Save" onclick="javascript:Content.Item.Save('@(Model.ItemFormID)');" />
+        </form>
+         @if (Model.ItemID != null)
+         {
+             <div>
+                <div>
+                    <div><span>Last Updated By :</span>@(Model.ItemLastUpdatedBy)</div>
+                    <div><span>Last Updated Date : </span>@(String.Format("{0:MM/dd/yyyy hh:mm}", Model.ItemLastUpdated))</div>
+                </div>
+
+                <div>
+                    <div><span>Added By :</span>@(Model.ItemAddedBy)</div>
+                    <div><span>Added Date : </span>@(String.Format("{0:MM/dd/yyyy hh:mm}", Model.ItemAdded))</div>
+                </div>
+            </div>
+
+         }
+    </div>
+</div>

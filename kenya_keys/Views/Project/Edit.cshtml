@@ -1,0 +1,77 @@
+@{
+	// page variables
+    KK.Models.Project project = null;
+	KK.Models.Project parent = null;
+
+    string projectName = "";
+    string projectShow = "checked";
+    string projectHtml = "";
+    string photoId = "";
+    string parentId = "";
+
+    // get the project if it exists
+    if (this.ViewData["Project"] != null) {
+        project = (KK.Models.Project)this.ViewData["Project"];
+        projectName = project.ProjectName;
+        projectHtml = project.ProjectHtml;
+        projectShow = project.ProjectHide == true ? "" : "checked";
+    }
+
+    // If the project has a parent that means it is a project page 
+    if (this.ViewData["Parent"] != null) {
+    	parent = (KK.Models.Project)this.ViewData["Parent"];
+    	parentId = parent.ProjectID.ToString();
+    }
+
+    // 
+    KK.Models.PhotoDropDown ppd = new KK.Models.PhotoDropDown();
+    if (project != null) {
+    	ppd.SelectedPhotoID = project.ProjectImageID ;
+    }
+    ppd.OnChange = "document.getElementById('photo_id').value = this.options[this.selectedIndex].value;";
+
+
+
+}
+
+	<div><a href="javascript:Project.closeWindow();">Close</a></div>
+	<div>
+	@if (project != null && parent == null) 
+    {
+    	<a href="javascript:Project.edit(null, @(project.ProjectID));">Add Page</a>
+    }
+    </div>
+
+	<form id="AddProject" method="POST">
+		<!-- Will be set for the edit project -->
+		<div id="photo-div">
+			
+			@if (parent == null) 
+			{
+				<span class="note">Upload Images in the Admin Section</span>
+				@Html.Partial("~/Views/Photo/DropDown.cshtml", ppd)
+			}
+			<input id="photo_id" type="hidden" name="photo_id" value="@(photoId)" />
+		</div>
+		<input type="hidden" name="project_id" value="@(project != null ? project.ProjectID.ToString() : "")" />
+		<input type="hidden" name="parent_id" value="@(parentId)" />
+        
+        
+		<div><span>Name : </span>
+			 <input name="proj_name" type="text" value="@(projectName)" />
+		</div>
+		<div><span>Description : </span>
+			<textarea class="ckeditor-html" name="ProjectHtml" >@(projectHtml)</textarea>
+            <input name="proj_html" type="hidden" value="" />
+		</div>
+		
+		<div style="display:none;"><span>Display : </span>
+			 <input name="proj_display" type="checkbox" checked="@(projectShow)" />
+		</div>
+		<div><input type="button" onclick="javascript: Project.submit(@(project != null ? project.ProjectID.ToString() : ""));" value="@(project == null ? "Add" : "Save")" /></div>
+	</form>
+
+
+
+
+</div>

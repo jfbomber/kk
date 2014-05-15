@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Index";
+    List<KK.User> users = (List<KK.User>)ViewData["users"];
+}
+
+<script src="~/Scripts/jquery.zclip.js"></script>
+<table>
+    <tr>
+        <th>Users</th>
+        <th>Photos</th>
+        <th>Pages</th>
+    </tr>
+    <tr>
+        <td>
+            <div style="width : 250px; padding : 10px;">
+                
+                <ul>
+                @foreach (KK.User user in users)
+                {
+                    <li><a href="/User/Edit/@(user.UserName)">@(user.FullName)</a></li>
+                }
+                </ul>
+            </div>
+        </td>
+        <td>
+            <div style="width : 500px; border-left : solid 1px gray; padding : 5px;">
+                <form id="photoUploadForm" enctype="multipart/form-data" action="/Photo/Add" method="post">
+                    <input type="file" name="upload" value="Upload File" onchange="javascript:document.forms.photoUploadForm.submit();" />
+                    <input type="hidden" name="redirect" value="~/Admin/Index" />
+                </form>
+                <br />
+                <div>
+                    @Html.Partial("~/Views/Photo/List.cshtml")
+                </div>
+            </div>
+        </td>
+        <td>
+        	<div>
+        		<a href="~/Admin/Slides">Slides</a>
+        	</div>
+        </td>
+    </tr>
+    
+   
+</table>

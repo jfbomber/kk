@@ -1,0 +1,356 @@
+﻿body {
+    font-family:Tahoma;
+    font-size : 10pt;
+}
+
+tr { vertical-align:top; }
+ul { margin:0; }
+ul.float { list-style:none; }
+ul.float li { 
+    float : left;
+    list-style:none;
+    padding : 5px;
+}
+
+h1, h2, h3 { margin:0; padding:5px;}
+
+
+a {  text-decoration:none; }
+div.edit {  }
+div.edit div.field {  margin-top:25px; } 
+span.note { font-size:8pt; color : Gray; }
+    
+
+#content-wrapper {
+    width: 1100px;
+    margin-left: 100px;
+    border: solid 1px gray;
+}
+
+#banner {
+    height: 150px;
+    background: url('../Images/banner/books.jpg') no-repeat;
+    width: 1100px;
+}
+
+    #banner .login {
+        
+        width : 100%;
+        background-color : green;
+    }
+
+
+
+
+ul#menu {
+    height: 35px;
+    background-color: #20330F;
+    background : url('/Images/body/menubg.png') repeat-x;
+    font-size : 10pt;
+    list-style: none outside none;
+}
+
+ul#menu li {
+    margin: 0;
+    float: left;
+    font-size : 9pt;
+    width: 105px;
+    color: white;
+    padding: 10px;
+    letter-spacing : 2px;
+    text-align: center;
+}
+
+ul#menu li a {
+    color: white;
+    font-weight: normal;
+}
+
+div#content {
+    padding: 5px;
+    margin: 5px;
+}
+
+
+.tiles {
+}
+
+.tiles .tile-row {
+    clear:both;
+    padding-top:10px;
+    width : 100%
+}
+
+    .tiles > .tile-row > img {
+       
+    }
+
+.tiles .tile {
+    background: url('../Images/buttons/item_tile.png') no-repeat;
+    width : 85px;
+    height : 36px;
+    float : left;
+    margin-left : 10px;
+    padding-top:5px;
+    font-size:9pt;
+    text-align:center;
+    color : white;
+    font-weight:bold;
+    cursor:pointer;
+    border : solid white 5px;
+    z-index:250;
+}
+
+    .tiles .selected {
+        border : solid 2px blue;
+    }
+
+.tiles .empty{
+    background : none;
+}
+
+
+
+#AddProject div {
+    margin-top: 15px;
+}
+
+
+div.content-display {
+    display:table;
+    width: 100%;
+}
+
+    div.content-display > div.content-column {
+        display:table-cell; 
+        padding:10px;
+        padding-top:0px;
+        min-width : 325px;
+        vertical-align:top;
+    }
+
+div.content-edit > div {
+    margin-top:10px;
+}
+
+li.admin-context-menu { width : 100px; background-color : White; border : solid 1px blue; color : Gray; padding:25px; }
+li.admin-context-menu div.context-menu { color : white; position : absolute;  display:none; background-color : Gray; } 
+li.admin-context-menu div.context-menu:hover { background-color : Yellow; cursor : pointer; color : black; }
+
+
+div.item-edit {
+    position:absolute;
+    background-color : white;
+    padding : 15px;
+    z-index:250;
+    top  : 25px;
+    left : 25px; 
+    right : 25px;
+    bottom : 25px;
+    border : solid 1px black;
+
+
+}
+
+.item-close {
+    float : right;
+    margin-right:15px;
+    font-size:8pt;
+}
+    div.item-edit > div {
+        margin-top:10px;
+    }
+
+
+
+.admin-edit {
+font-size : 8pt;
+}
+
+.photo-row {
+    min-width : 450px;
+}
+
+    .photo-row .context-menu {
+        display:none;
+        width : 200px;
+        background-color : tan;
+        border: solid 1px black;
+        height : 50px;
+
+    }
+
+        .photo-row .context-menu li {
+            list-style : none;
+        }
+
+
+
+div.context-menu { width : 100px; background-color : White; border : solid 1px blue; color : Gray; padding:25px; }
+div.menu { color : white; position : absolute; background-color : Gray; padding:10px; }
+    div.menu > div.content-menu-item {
+        margin-top:5px;
+    }
+div.menu > div.content-menu-item:hover {
+        background-color : Yellow;
+        cursor : pointer;
+        color : gray;
+    }
+
+
+
+.admin-message {
+    padding : 5px;
+    font-size : 8pt;
+    color : gray;
+    font-style:italic;
+}
+
+
+.blog-list { 
+    font-size : 10pt;
+}
+
+.blog-list .blog-item { 
+	margin-top:25px;
+	width : 500px;
+}
+
+.blog-list .blog-item .blog-title { 
+	font-weight : bold;
+	font-size : 12pt;
+}
+
+.blog-list .blog-item .blog-date { 
+
+	font-size : 8pt;
+	font-weight : normal;
+}
+
+.blog-list .blog-item .blog-author { 
+	color : Gray;
+	font-style : italic;
+
+}
+
+.blog-list .blog-item .blog-description { 
+
+}
+
+    
+
+ 
+
+
+
+
+
+ #ui-datepicker-div {
+ 	background-color : White;
+ }
+
+
+
+
+ #project-pages {
+ 	width:350px; 
+ 	margin-left : 200px;
+ }
+
+
+
+
+
+
+
+
+ /*
+  * GALLERY
+  */
+.gallery {
+    width: 700px;
+    height: 350px;
+    border: solid 1px gray;
+    padding: 10px;
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.gallery_note {
+    width: 200px;
+    height: 150px;
+    background: url('../Images/body/fade_white_50.png') repeat;
+    padding: 5px;
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+}
+
+.gallery_paging {
+	width : 100%;
+}
+
+.gallery_container {
+    width : 750px;
+    margin-left : 150px;
+}	
+
+.gallery_pages {
+	padding-top : 5px;
+	width : 100px;
+ 	display: block;
+   	margin-left: auto;
+   	margin-right: auto 
+}
+
+
+ /*
+  * GALLERY
+  */
+#login img { } 
+#login a { text-decoration:none; font-size : 10pt; } 
+#login .warning { color : red; } 
+#login .success { color : green; } 
+#login label#messageLabel { font-size:8pt; margin-left:10px; }
+
+    #login .login-tab {
+        border-color : gray;
+        background-color : white;
+        opacity : 0.95;
+        /*Applying CSS 3radius*/   
+       -moz-border-radius: 5px;
+       -webkit-border-radius: 5px;
+        border-radius: 0px 0px 5px 5px;
+         padding : 10px; 
+    }
+
+#login { font-size:8pt; min-width:200px; color : gray; font-family:tahoma; float : right; margin-right : 10px; }
+#login input[type="text"],#login input[type="password"] {
+   
+    width : 100px;
+    padding: 3px 5px;   
+    border: 1px solid #DDDDDD;
+    height : 15px;
+    /*Applying CSS3 gradient*/
+    background: -moz-linear-gradient(center top , #FFFFFF,  #EEEEEE 1px, #FFFFFF 20px);    
+    background: -webkit-gradient(linear, left top, left 20, from(#FFFFFF), color-stop(5%, #EEEEEE) to(#FFFFFF));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FBFBFB', endColorstr='#FFFFFF');
+    
+    /*Applying CSS 3radius*/   
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    
+    /*Applying CSS3 box shadow*/
+    -moz-box-shadow: 0 0 2px #DDDDDD;
+    -webkit-box-shadow: 0 0 2px #DDDDDD;
+    box-shadow: 0 0 2px #DDDDDD;
+
+}
+#login input[type="text"]:hover,#login input[type="password"]:hover { border:1px solid #cccccc; }
+#login input[type="text"]:hover,#login input[type="password"]:hover { box-shadow:0 0 2px #FFFE00; }
+
+#login input[type="password"] { margin-left : 15px; } 
+.login-container { padding : 3px; }
+#banner .login a { color : white; text-decoration:none; } 
+

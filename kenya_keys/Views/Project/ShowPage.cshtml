@@ -1,0 +1,32 @@
+﻿@{
+    KK.Models.ProjectPage page = (KK.Models.ProjectPage)ViewData["Page"];
+    bool isAdmin = Request.IsAuthenticated && User.IsInRole("admin");
+}
+
+<div>
+    @if (isAdmin)
+    {
+        <a href='javascript:Project.editPage(@(page.ProjectID), @(page.PageID));'>Edit</a>  
+        	@(Html.Raw("|"))
+        <a href='javascript:Project.deletePage(@(page.PageID));'>Delete</a>
+    }
+
+    <div><a href="javascript:Project.showProject(null,@(page.ProjectID));">Back</a></div>
+
+    <div>@Html.Raw(page.PageHtml)</div>
+
+    <div style="width:400px;">
+    @if (page.PrevPage != null) 
+    {
+    	<div style="float:left;"><a href="javascript:Project.showPage(@(page.PrevPage));">Prev Page</a></div>
+    }
+
+    @if (page.NextPage != null) 
+    {
+    	<div style="float:right;"><a href="javascript:Project.showPage(@(page.NextPage));">Next Page</a></div>
+    }
+    </div>
+
+   
+
+</div>

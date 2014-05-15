@@ -1,0 +1,96 @@
+﻿@model KK.Models.Content
+@{
+    if (Model == null) {
+        return;   
+    }
+    
+    
+    Model.IsAdmin = Request.IsAuthenticated && User.IsInRole("admin") ? true : false;
+    
+    // usually you don't want to store this here but since we are using 
+    // partial views it wouldn't be called in the controller
+    if (Request.QueryString["ItemID"] != null)
+    {
+        Model.ContentItem = KK.Models.ContentItem.Get(Convert.ToInt32(Request.QueryString["ItemID"]));
+    }
+    
+    int Row = 0;
+    int Col = 0;
+    bool Closed = true;
+}
+
+ <div id="@(Model.ContentElementID)" class="content-display"> 
+     
+     
+        
+
+        @if (Model.ContentPhotoID != null)
+        {
+            <div class="content-column"   style="width:300px;" >
+            @if (Model.IsAdmin)
+            {
+             
+                <a href="javascript:Content.Item.Edit(null, @(Model.ContentID));" > 
+                    <img  src="~/Images/icons/icon-add_20.png" alt="Add Item [+]" title="Add Item [+]" /> Add Item [+]
+                </a>        
+            }
+            
+            <div style="padding-top:25px;">
+                <img style="border:solid 1px gray; margin-left:15px;"  id="@(Model.ElementPhotoViewerID)" src="/Photo/GetPhoto?photoId=@(Model.ContentPhotoID)&size=m" alt="content photo" />
+            </div>
+             
+            @if (Model.ContentItem != null)
+            {
+                <img src="~/Images/graphics/onload.png" alt=" " onload="javascript:Content.Item.Display({ ItemID : @(Model.ContentItem.ItemID), Sender : null, DisplayID : '@(Model.ElementDisplayID)', TitleID : '@(Model.ElementTitleID)', HtmlID : '@(Model.ElementHtmlID)', PhotoViewerID : '@(Model.ElementPhotoViewerID)'  , ContentID : @(Model.ContentID) });" />
+
+            }
+            
+
+            <div class="tiles">
+            @foreach (KK.Models.ContentItem item in Model.ContentItems)
+            {
+                if (Col == 0)
+                {
+                    Closed = false;
+                    @:<div class="tile-row">
+                }
+                
+                
+                // //  Display: function (itemId, sender, displayId, photoViewerId)
+                <div title="@(item.ItemID)" onclick="javascript:Content.Item.Display({ ItemID : @(item.ItemID), Sender : this, DisplayID : '@(Model.ElementDisplayID)', TitleID : '@(Model.ElementTitleID)', HtmlID : '@(Model.ElementHtmlID)', PhotoViewerID : '@(Model.ElementPhotoViewerID)'  , ContentID : @(Model.ContentID) });" class="tile">@item.ItemTitle</div>
+        
+                Col++;
+                if (Col > 2)
+                {
+                    Closed = true;
+                    Col = 0;
+                    Row++;
+                    @:</div>
+                }
+            }
+
+            @if (!Closed)
+            {
+                @:</div>
+            } 
+
+            </div>
+        </div>
+        }
+
+        
+
+        
+        <div class="content-column">
+            <div id="@(Model.ElementDisplayID)">
+                @if (Model.IsAdmin)
+                {
+                    <a class="admin-edit" href="javascript:Content.Edit(@(Model.ContentID), '@(Model.ContentElementID)');" ><img src="~/Images/icons/icon-edit_20.png" title="Edit Content" alt="Edit Content" />Edit Content</a>
+                }
+                <h1>@(Model.ContentTitle)</h1>
+                <div id="@(Model.ElementTitleID)"></div>
+                <div id="@(Model.ElementHtmlID)">@(Html.Raw(Model.ContentHtml))</div>
+            </div>
+        </div>
+ </div>
+

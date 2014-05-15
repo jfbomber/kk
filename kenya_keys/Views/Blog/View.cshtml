@@ -1,0 +1,23 @@
+﻿@model KK.Models.Blog
+@{
+    bool isAdmin = Convert.ToBoolean(ViewData["IsAdmin"]);
+}
+
+
+
+@if (isAdmin) 
+{
+	<div>
+	<a href="/Blog/Edit?blogId=@(Model.BlogID)">Edit</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="javascript:Blog.deleteBlog(@Model.BlogID);">Delete</a>
+
+	</div>
+}
+
+<div>
+	<a href="/Home/Blog">Blog List</a>
+</div>
+<div>@(Model.BlogTitle)</div>
+<div class="html-escape">@(Model.BlogHtml)</div>
+

@@ -1,0 +1,37 @@
+﻿@{
+    List<KK.Models.Photo> photos = (List<KK.Models.Photo>)ViewData["photos"];
+    int Row = 0;
+    int Col = 0;
+    bool Closed = true;
+    bool IsAdmin = Request.IsAuthenticated && User.IsInRole("admin") ? true : false;
+}
+
+@if (IsAdmin) {
+    <img alt=" " src="~/Images/graphics/onload.png" onload="javascript:ContextMenu.Init('Admin-PhotoGallery');"/>
+    <div class="admin-message">You can right click on the images for more options</div>
+       
+}
+
+@foreach (KK.Models.Photo photo in photos)
+{
+    if (Col == 0)
+    {
+        Closed = false;
+        @:<div class="photo-row">
+    }
+    <img title="@(photo.PhotoID)"   @(IsAdmin ? "oncontextmenu=javascript:ContextMenu.ShowMenu(event);" : "")  src='/Photo/GetPhoto?photoId=@(photo.PhotoID)&size=s' alt='@(photo.PhotoName)' />
+     
+    Col++;
+    if (Col > 4)
+    {
+        Closed = true;
+        Col = 0;
+        Row++;
+        @:</div>
+    }
+}
+
+@if (!Closed)
+{
+    @:</div>
+}

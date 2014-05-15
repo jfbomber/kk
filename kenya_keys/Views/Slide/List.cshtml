@@ -1,0 +1,38 @@
+
+@{
+    
+    
+    List<KK.Models.Slide> slides = (List<KK.Models.Slide>)ViewData["slides"];
+    string dataSource = "{ \"items\":[";
+    int i = 0;
+    foreach(KK.Models.Slide slide in slides) 
+    {
+        if (i != 0)
+        {
+            dataSource += ",";
+        }
+        dataSource += "{ \"image\": \"" + slide.Photo.FullUrl + "\",\"description\": \"" + slide.SlideText + "\" }";
+        i++;
+    } 
+    dataSource += "]}";
+}
+<input type="hidden" value="@(dataSource)" id="slide-dataSource" />
+<script type="text/javascript" src="~/Scripts/js/gallery.js">
+	
+</script>
+<div class="gallery_container">
+    <div class="gallery" style="background-image:url('@(slides[0].Photo.FullUrl)')">
+        <div class="gallery_note html-escape">
+    	    @(slides[0].SlideText)
+        </div>
+    </div>
+    <div class="gallery_paging">
+	    <div class="gallery_pages">
+            @foreach (KK.Models.Slide slide in slides) {
+               <img class="gallery_page" alt="@(slide.SlideIndex)" src="~/Images/gallery/gallery_page@(slide.SlideIndex == 0 ? "_selected" : "").png" />
+            }
+	    </div>
+    </div>
+</div>
+
+                           

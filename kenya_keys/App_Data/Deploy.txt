@@ -1,0 +1,5 @@
+﻿1. Project > Deploy to Web (Send to the DropBox/FWM/Sites/Export folder)
+2. Delete This line from the web.config <add assembly="Mono.Data.Sqlite, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+3. Copy Mono.Data.Sqlite.dll and sqlite.dll into the bin
+4. In Windows Move the files from the Export folder to the kk_beta folder
+5. Edit permissions to grant all to SR1\IIS_IUSRS

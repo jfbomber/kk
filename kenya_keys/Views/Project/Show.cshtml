@@ -1,0 +1,38 @@
+﻿@{
+    
+    KK.Models.Project project = (KK.Models.Project)ViewData["Project"];
+
+	string parentTitle = "";
+	string parentId = "null";
+	if (ViewData["Parent"] != null) {
+		KK.Models.Project parent = (KK.Models.Project)ViewData["Parent"];
+		parentTitle = parent.ProjectName;
+		parentId = parent.ProjectID.ToString();
+    }
+	
+	bool isAdmin = Request.IsAuthenticated && User.IsInRole("admin");
+    int PageIndex = 0;
+
+}
+
+<div>
+    @if (isAdmin)
+    {
+        <a href='javascript:Project.edit(@(project.ProjectID),@(parentId));'>Edit</a> @(Html.Raw("|"))
+        <a href='javascript:Project.deleteProject(@(project.ProjectID));'>Delete</a>
+    }
+
+    @if (parentTitle.Length > 0) 
+    {
+    	<h2>@(parentTitle)</h2>
+    }
+
+    <div>@Html.Raw(project.ProjectHtml)</div>
+
+
+    <div id="project-pages">
+			
+	</div>
+
+
+</div>

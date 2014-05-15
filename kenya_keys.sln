@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kenya_keys", "kenya_keys\kenya_keys.csproj", "{F677B6A0-95CD-4EC0-BB22-C933F2A6DC4F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F677B6A0-95CD-4EC0-BB22-C933F2A6DC4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F677B6A0-95CD-4EC0-BB22-C933F2A6DC4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F677B6A0-95CD-4EC0-BB22-C933F2A6DC4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F677B6A0-95CD-4EC0-BB22-C933F2A6DC4F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = kenya_keys\kenya_keys.csproj
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = None
+		$1.ResourceNamePolicy = FileFormatDefault
+		$0.TextStylePolicy = $2
+		$2.inheritsSet = null
+		$2.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $3
+		$3.AfterDelegateDeclarationParameterComma = True
+		$3.inheritsSet = Mono
+		$3.inheritsScope = text/x-csharp
+		$3.scope = text/x-csharp
+		$0.TextStylePolicy = $4
+		$4.FileWidth = 120
+		$4.TabsToSpaces = False
+		$4.inheritsSet = VisualStudio
+		$4.inheritsScope = text/plain
+		$4.scope = text/plain
+		$0.TextStylePolicy = $5
+		$5.inheritsSet = null
+		$5.scope = application/javascript
+		$0.TextStylePolicy = $6
+		$6.inheritsSet = null
+		$6.scope = text/css
+		$0.TextStylePolicy = $7
+		$7.inheritsSet = null
+		$7.scope = application/x-asax
+		$0.TextStylePolicy = $8
+		$8.inheritsSet = null
+		$8.scope = application/config+xml
+		$0.XmlFormattingPolicy = $9
+		$9.inheritsSet = null
+		$9.scope = application/config+xml
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

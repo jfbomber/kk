@@ -1,0 +1,47 @@
+@model KK.Models.Content
+@{
+    KK.Models.PhotoDropDown ppd = new KK.Models.PhotoDropDown();
+    ppd.SelectedPhotoID = Model.ContentPhotoID;
+    ppd.OnChange = 	"document.getElementById('"+ppd.PhotoViewID+@"').src = "+
+        		   	"'/Photo/GetPhoto?photoId='+this.options[this.selectedIndex].value+'&size=m';"+
+       			  	"$('input[name=photoID]').val(this.options[this.selectedIndex].value);";
+
+}
+<h1>Admin - Edit Content</h1>
+<div class="content-edit">
+
+<form name="@(Model.ContentFormID)">
+<input type="hidden" name="contentID" value="@(Model.ContentID)" />
+<input type="hidden" name="photoID" value="@(Model.ContentPhotoID)" />
+<div>
+     <div class="content-column"  >
+         <div>
+            @Html.Partial("~/Views/Photo/DropDown.cshtml", ppd)
+        </div>
+     </div>
+     <div class="content-column">
+         <div><span>Content Controller :</span><input name="contentController" type="text" value="@(Model.ContentController)" /></div>
+         <div><span>Content Action :</span><input name="contentAction" type="text" value="@(Model.ContentAction)" /></div>
+         <div><span>Content Title :</span><input name="contentTitle" type="text" value="@(Model.ContentTitle)" /></div>
+            <div><span>Content Html : </span></div>
+            <div>
+                <textarea name="_TextAreaHtml">@(Html.Raw(Model.ContentHtml))</textarea>
+                <input type="hidden" name="contentHtml" value="@(Html.Raw(Model.ContentHtml))" />
+            </div>
+     </div>
+ </div>
+    <input type="button" value="Save" onclick="javascript:Content.Save('@(Model.ContentFormID)');" />
+</form>
+<div>
+    <div>
+        <div><span>Last Updated By :</span>@(Model.ContentUpdatedBy)</div>
+        <div><span>Last Updated Date : </span>@(String.Format("{0:MM/dd/yyyy hh:mm}", Model.ContentUpdated))</div>
+    </div>
+
+    <div>
+        <div><span>Added By :</span>@(Model.ContentAddedBy)</div>
+        <div><span>Added Date : </span>@(String.Format("{0:MM/dd/yyyy hh:mm}", Model.ContentAdded))</div>
+    </div>
+</div>
+
+</div>

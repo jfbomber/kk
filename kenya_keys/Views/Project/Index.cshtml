@@ -1,0 +1,77 @@
+﻿@using KK.Models;
+@{
+
+		// get the projects 
+      List<Project> projects = (List<Project>)ViewData["Projects"];
+      int Row = 0;
+      int Col = 0;
+
+      Project parent = (Project)ViewData["Parent"];
+
+      // default photourl
+      string photoUrl = "/Images/photos/desk.jpg";
+
+      // set a project photourl if it exists
+      if (parent != null && parent.ProjectImageID != 0) {
+      	photoUrl = parent.GetImageUrl(Photo.PhotoSize.Medium);
+      }
+      // tells the loop function whether the element is closed
+      bool Closed = true;
+}
+
+
+  	@if (parent == null) 
+    {
+		<div id="project-photo">
+		    <img id="project-photo-img" alt="desk" src="~/Images/photos/desk.jpg" />
+		</div>
+	} 
+
+<div class="projects">
+    @foreach (Project project in projects)
+    {
+    	string cssStyle = project.Selected ? "project selected" : "project"; 
+    	if (project.Selected) {
+    		int ib = 0;
+    	}
+        if (Col == 0)
+        {
+        	
+            Closed = false;
+            @:<div class="project-row">
+        }
+            
+      	if (parent == null) 
+	    {
+			 <div id="project-tile-@(project.ProjectID)" onclick="javascript:Project.showProject(this,@(project.ProjectID));" class="@(cssStyle)">
+        		<label>
+        		@project.ProjectName
+        		</label>
+        	</div>
+		} 
+		else 
+		{
+			<div id="project-tile-@(project.ProjectID)" onclick="javascript:Project.showPage(@(project.ProjectID));" class="@(cssStyle)">
+	        	<label>
+        		@project.ProjectName
+        		</label>
+	        </div>
+		}
+	        
+        Col++;
+        if (Col > 2)
+        {
+            Closed = true;
+            Col = 0;
+            Row++;
+            @:</div><br />
+        }
+    }
+
+    @if (!Closed)
+    {
+        @:</div>
+    }
+
+</div>
+<img style="display:none;" src="@(photoUrl)" onload="javascript:document.getElementById('project-photo-img').src = this.src" alt="test" />

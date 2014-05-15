@@ -1,0 +1,43 @@
+﻿
+@{
+	List<KK.Models.Blog> blogs = (List<KK.Models.Blog>)ViewData["blogs"];
+	int offset = Convert.ToInt32(ViewData["offset"]);
+	int limit = Convert.ToInt32(ViewData["limit"]);
+	int total = Convert.ToInt32(ViewData["total"]);
+}
+
+
+
+<div class="blog-list">
+	<input type="hidden" id="blog_offset"  value="@(offset)" />
+	<input type="hidden" id="blog_limit"  value="@(limit)" />
+	<input type="hidden" id="blog_total"  value="@(total)" />
+@foreach (KK.Models.Blog blog in blogs) 
+{
+	<div class="blog-item">
+		<div class="blog-title"><a href="/Blog/View?blogId=@(blog.BlogID)">@(blog.BlogTitle)</a>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<div class="blog-date">
+				@(blog.BlogPostDateString)
+			</div>
+		</div>
+
+		<div class="blog-author">
+			@(blog.BlogAuthorData.FullName)
+		</div>
+		<div class="blog-description">
+			@(blog.BlogDescription)
+		</div>
+	</div>
+}
+
+@if (offset != 0) 
+{
+	<a href="javascript:blogPrev()">Prev</a>
+}
+
+@if (offset + limit < total)
+{
+<a href="javascript:blogNext();">Next</a>
+}
+</div>

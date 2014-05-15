@@ -1,0 +1,28 @@
+﻿@{
+ 
+}
+    
+    <div class="login-tab">
+    @if (Request.IsAuthenticated) {
+        <div>
+           Welcome,  @(User.Identity.Name) &nbsp; 
+            &nbsp;&nbsp;<a href="javascript:KenyaKeys.logout();">Logout</a>
+            @if (User.IsInRole("admin")) {
+                <span>&nbsp; | &nbsp;</span>   
+                @Html.ActionLink("Admin", "Index", "Admin");
+                <!--span>&nbsp; | &nbsp;</!--span>
+                <a href="javascript:admin.photo.openGallery();">Gallery</a-->
+            }
+
+        </div>
+    } else {
+        <div class="login-container">
+            <input id="username" type="text" placeholder="username" />
+            <input id="password" type="password" placeholder="password" />
+                   &nbsp;&nbsp;&nbsp;&nbsp;
+		    <a href="javascript:KenyaKeys.login();">Login</a>
+		    <label id='messageLabel'></label>
+	    </div>
+    }
+    </div>
+

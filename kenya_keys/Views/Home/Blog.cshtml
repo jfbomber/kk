@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Blog";
+	bool IsAdmin = Convert.ToBoolean(ViewData["IsAdmin"]);
+	List<KK.Models.Blog> blogs = (List<KK.Models.Blog>)ViewData ["blogs"];
+	// @Html.Partial("~/Views/Blog/List.cshtml")
+}
+
+<h2>Blog</h2>
+
+@if (IsAdmin) 
+	{
+		<a href="/Blog/Edit">Add</a>
+
+	}
+<script type="text/javascript">
+		function blogPrev() {
+			var limit = document.getElementById("blog_limit").value;
+			var total = document.getElementById("blog_total").value;
+			var offset = document.getElementById("blog_offset").value;
+
+			execute(limit, total, parseInt(offset)-parseInt(limit));
+
+		}
+
+		function blogNext() {
+			var limit = document.getElementById("blog_limit").value;
+			var total = document.getElementById("blog_total").value;
+			var offset = document.getElementById("blog_offset").value;	
+
+			execute(limit, total, parseInt(offset)+parseInt(limit));
+		}
+
+		function execute(limit,total,offset) {
+			$.ajax({
+				url : '/Blog/List?offset='+offset+'&limit='+limit+'&total='+total,
+				data : {
+					limit : limit, 
+					total : total,
+					offset : offset
+				},
+				success : function(result) {
+					document.getElementById("blog-content").innerHTML = result;
+				},
+				error : function(result) {
+					console.log("error", result);
+				}
+			});
+		}
+
+
+
+	</script>	
+<div id="blog-content"> 
+	@Html.Action("List", "Blog", null)		
+</div>

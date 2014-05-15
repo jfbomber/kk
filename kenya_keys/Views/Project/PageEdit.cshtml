@@ -1,0 +1,48 @@
+@{
+	// Globals
+ 	KK.Models.ProjectPage page = null;
+	KK.Models.Project project = (KK.Models.Project)this.ViewData["Project"];
+ 	
+ 	int PageIndex = Convert.ToInt32(this.ViewData["PageIndex"]);
+ 	// Properties
+ 	string pageId 		= "";
+ 	string pageHtml 	= "";
+ 	string pageIndex	= PageIndex.ToString();
+    string pageTitle = "";
+    if (this.ViewData["Page"] != null) {
+        page = (KK.Models.ProjectPage)this.ViewData["Page"];
+        pageId = page.PageID.ToString();
+        pageHtml= page.PageHtml;
+        pageTitle = page.PageTitle;
+    	project = page.GetProject();	
+    }
+
+}
+
+
+
+<div>
+   	<a href="javascript:Project.edit(@(project.ProjectID));">Back</a>
+    <form action="/Project/SavePage" id="ProjectPage" method="POST" enctype="multipart/form-data">
+    	<input type="hidden" value="@(project.ProjectID)" name="project_id" />
+    	<input type="hidden" value="@(pageId)" name="page_id" />
+    	<input type="hidden" value="@(pageIndex)" name="page_index" />
+
+
+
+    	<div><span>Project:</span>@(project.ProjectName)</div> 
+
+    	<div>
+			<span>Title</span><input type="text" name="page_title" value="@(pageTitle)" />
+		</div>
+
+    	<div>
+			<textarea class="ckeditor-html" id="PageHtml" >@(pageHtml)</textarea>
+            <input name="page_html" type="hidden" value="" />
+		</div>
+
+		<input type="button" value="Save" onclick="javascript:Project.savePage();" />
+
+	</form>
+
+</div>

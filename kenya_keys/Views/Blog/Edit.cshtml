@@ -1,0 +1,91 @@
+﻿@model KK.Models.Blog 
+@{
+    string BlogHtml = Model.BlogHtml != String.Empty ? Model.BlogHtml :  "";
+	string BlogTitle = Model.BlogTitle != String.Empty ? Model.BlogTitle : "";
+	string BlogDescription = Model.BlogDescription != String.Empty ? Model.BlogDescription : "";
+	string BlogHidden = Model.BlogHidden ? "checked=checked" : "";
+	string BlogAuthor = Model.BlogAuthor != String.Empty ? Model.BlogAuthor : "";
+}
+
+@section Link 
+{
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" href="/Content/themes/base/jquery.ui.datepicker.css" />
+}
+
+<div>
+    <script src="~/ckeditor/ckeditor.js"></script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+        	var textAreas = $("textarea").val(unescape($("textarea").val()));
+        	// load date picker
+        	$("input[type=datetime]").datepicker();
+
+
+            CKEDITOR.replace("blog_html_ta", {
+                toolbar: 'Basic',
+                uiColor: '#9AB8F3'
+            });
+        }
+    </script>
+
+
+
+    <form id="blog-edit" action="/Blog/Save"  method="post">
+        <div class="edit">
+
+            <div class="field">
+                <span class="required title"> Blog Title : </span>
+                <input type="text" name="blog_title" value="@(BlogTitle)" />
+            </div>
+
+            <div class="field">
+                <span class="required title"> Description : </span>
+                <input type="text" name="blog_description" value="@(BlogDescription)" />
+            </div>
+
+            <div class="field">
+                <span class="required title"> Blog Hidden : </span>
+                <input type="checkbox" name="blog_hidden" @(BlogHidden)  />
+            </div>
+
+
+            @if (Model.BlogID != null) 
+            {
+
+            	<input type="hidden" name="blog_id" value="@(Model.BlogID)" />
+            	<div class="field">
+                	<span class="required title"> Blog Author : </span> 
+                	<label>@(BlogAuthor)</label>
+           		</div>
+                
+                <div class="field">
+                	<span class="required title"> Blog Post Date : </span> 
+                	<label>@(Model.BlogPostDateString)</label>
+           		</div>
+                
+            }
+
+            <div class="field">
+            	<div>    <span class="required title"> Blog Html : </span></div>
+                <textarea id="blog_html_ta">@(BlogHtml)</textarea>
+                <input name="blog_html" type="hidden" value="" />
+            </div>
+            <div class="field">
+                <span class="required title "> Blog Start Date : </span>
+                <input type="datetime" name="blog_start_date" value="@(Model.BlogStartDateString)" />
+            </div>
+            <div class="field">
+                <span class="required title "> Blog End Date : </span>
+                <input type="datetime" name="blog_end_date" value="@(Model.BlogEndDateString)" />
+            </div>
+        </div>
+
+        <div>
+            <input type="button" onclick="javascript:Blog.submit();" value="Save" />
+        </div>
+    </form>
+
+
+</div>

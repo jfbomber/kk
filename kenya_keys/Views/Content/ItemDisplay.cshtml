@@ -1,0 +1,24 @@
+﻿@model KK.Models.ContentItem
+@{
+    Model.IsAdmin = Request.IsAuthenticated && User.IsInRole("admin") ? true : false;
+}
+
+<div>
+@if (Model.IsAdmin)
+{
+    <a href="javascript:Content.Item.Edit(null, @(Model.ContentID));" > Edit Item</a>   
+}
+
+<a href="javascript:Content.Item.Back();">Back</a>
+</div>
+
+
+ <div id="@(Model.ItemElementID)" class="content-display"> 
+     @if (Model.IsAdmin)
+    {
+        <a href="javascript:Content.Item.Edit(@(Model.ItemID), '@(Model.ItemElementID)');" >Edit</a>
+    }
+    <h1>@(Model.ItemTitle)</h1>
+    <div>@(Html.Raw(Model.ItemHtml))</div>
+ </div>
+

@@ -1,0 +1,13 @@
+﻿@{
+    bool isAdmin = Convert.ToBoolean(ViewData["isAdmin"]);
+    KK.Models.Content content = (KK.Models.Content)ViewData["content"];   
+}
+<div class="read-only">
+    @if (isAdmin)
+    {
+        <a href="javascript:admin.content.edit('@(content.ContentController)','@(content.ContentAction)', '@(content.ElementID)')" >
+            Edit
+        </a>
+    }
+    <div id="@(content.ElementID)">@(Html.Raw(content.ElementHtml))</div>
+</div>

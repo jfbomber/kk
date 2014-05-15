@@ -1,0 +1,17 @@
+﻿@{
+    KK.Models.Content content = (KK.Models.Content)ViewData["content"];
+}
+<form id="AdminEditForm" method="get">
+    <input type="hidden" value="@(content.ContentID)" name="contentId" />
+    <input type="hidden" value="@(content.ContentController)" name="contentController" />
+    <input type="hidden" value="@(content.ContentAction)" name="contentAction" />
+    <input type="hidden" value="@(content.ElementDisplayID)" name="elementId" />
+    <div><span>Last Updated By :</span> @(content.ContentUpdatedBy)</div>
+    <div><span>Last Updated : </span>@(String.Format("{0:MM/dd/yyyy hh:mm}", content.ContentUpdated))</div>
+    <div>
+        <textarea name="element_html">@(Html.Raw(content.ContentHtml))</textarea>
+        <input type="hidden" name="elementHtml" value="" />
+    </div>
+
+    <input type="button" value="Save" onclick="javascript: admin.content.save('AdminEditForm');" />
+</form>

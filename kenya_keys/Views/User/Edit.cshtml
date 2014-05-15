@@ -1,0 +1,110 @@
+﻿@{
+    KK.User user = null;
+    string action = "/User/Update",
+        userId = "null",
+        firstName = "", 
+        lastName = "", 
+        userName = "", 
+        password = "", 
+        email  = "";
+    bool isActive = true;
+    
+    
+    List<KK.Role> roles = (List<KK.Role>)ViewData["roles"];
+    
+    if (ViewData["user"] != null) {
+        action = "/User/Update";
+        user = (KK.User)ViewData["user"];
+        userId = user.UserID.ToString();
+        userName = user.UserName;
+        password = user.Password;
+        email = user.Email;
+        firstName = user.FirstName;
+        lastName = user.LastName;
+        isActive = user.IsActive;
+        
+        for (int a = 0; a < user.Roles.Length; a++) {
+            string userRole = user.Roles[a];
+            
+            for (int b = 0; b < roles.Count; b++) {
+                KK.Role role = roles[b];
+                if (userRole == role.RoleName) {
+                    roles[b].IsSelected = true;   
+                }
+            }   
+        }
+        
+    } 
+    
+}
+
+<form name="edit-user" action="@(action)">
+    <div class="edit-user">
+        <div class="user-information">
+            <input type="hidden" name="userId" value="@(userId)" />
+            <div>
+                Username : 
+                <input type="text" name="userName" value="@(userName)" />
+            </div>
+            <div>
+                 Password : 
+                <input type="password" name="password" value="@(password)" />
+            </div>
+            <div>
+                 FirstName : 
+                <input type="text" name="firstName" value="@(firstName)" />
+            </div>
+            <div>
+                 LastName : 
+                <input type="text" name="lastName" value="@(lastName)" />
+            </div>
+            <div>
+                 Email : 
+                <input type="text" name="email" value="@(email)" />
+            </div>
+                <div>
+                 Is Active : 
+                <input type="checkbox" name="isActive" checked="@(isActive ? "checked" : "")" />
+            </div>
+        </div>
+        <div class="user-roles">
+            <table>
+                <tr>
+                    <td>
+                         <select id="roles-unselected" style="width : 150px; height : 75px;" multiple>
+                            @foreach (KK.Role role in roles)
+                            {
+                                if (!role.IsSelected)
+                                {
+                                    <option value="@(role.RoleID)">@(role.RoleName)</option>
+                                }
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <div><input type="button" value=">>" onclick="javascript: selectFromTo('roles-unselected', 'roles-selected');" /></div>
+                        <div><input type="button" value="<<" onclick="javascript: selectFromTo('roles-selected', 'roles-unselected');" /></div>
+                    </td>
+                    <td>
+                        <select  id="roles-selected"  style="width : 150px; height : 75px;" name="roles" multiple>
+                            @foreach (KK.Role role in roles)
+                            {
+                                if (role.IsSelected)
+                                {
+                                    <option value="@(role.RoleID)">@(role.RoleName)</option>
+                                }
+                            }
+                        </select>
+                    </td>
+                </tr>
+
+            </table>
+       
+
+
+
+        
+        </div>
+        <input type="button" value="@(userId.Length == 0 ? "Create" : "Update")" onclick="javascript: $('form[name=edit-user]').submit();" />
+    </div>
+</form>

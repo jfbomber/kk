@@ -1,0 +1,15 @@
+﻿<Properties GitUserInfo="UsingGIT">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="kenya_keys/Views/Content/_Edit.cshtml">
+    <Files>
+      <File FileName="kenya_keys/Views/Content/_Edit.cshtml" Line="8" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/jfoster/Dropbox/FWM/Sites/kenya_keys/kenya_keys/Models/Blog.cs" line="225" column="1" />
+      <Breakpoint file="/Users/jfoster/Dropbox/FWM/Sites/kenya_keys/kenya_keys/Models/ProjectPage.cs" line="53" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
